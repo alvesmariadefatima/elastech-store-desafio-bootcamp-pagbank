@@ -32,6 +32,9 @@ O objetivo foi criar uma **página estática** utilizando **HTML**, **CSS** e **
 
 ---
 
+## 👩🏻‍💻 Resultado Final
+<img src="./img/foto-site.png" alt="Foto da tela inicial do ElasTech Store"> 
+
 ## 🚀 Como Executar o Projeto  
 
 1. **Clone** o repositório:  
