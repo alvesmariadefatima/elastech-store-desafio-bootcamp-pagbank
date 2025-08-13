@@ -59,5 +59,5 @@ O objetivo foi criar uma **página estática** utilizando **HTML**, **CSS** e **
 - Maria de Fátima
 - Victoria Mafra
 - Beatriz Balestrieiro
-<hr>
-💡 Projeto desenvolvido para fins educacionais durante o Bootcamp Pagbank em parceria com a SoulCode Academy.
+---
+💡 Projeto desenvolvido para fins educacionais durante o Bootcamp **Pagbank** em parceria com a **SoulCode Academy**.
