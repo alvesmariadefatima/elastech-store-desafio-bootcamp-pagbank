@@ -54,10 +54,10 @@ O objetivo foi criar uma **página estática** utilizando **HTML**, **CSS** e **
 └── img/         # Pasta onde tem as imagens utilizadas no projeto
 ```
 
-# 👩‍💻 Integrantes
+# 👩‍💻 Equipe
 
-- Maria de Fátima
-- Victoria Mafra
+- [Maria de Fátima (@alvesmariadefatima)](https://github.com/alvesmariadefatima)
+- [Victoria Mafra (@torimafra)](https://github.com/torimafra)
 - Beatriz Balestrieiro
 ---
 💡 Projeto desenvolvido para fins educacionais durante o Bootcamp **Pagbank** em parceria com a **SoulCode Academy**.
