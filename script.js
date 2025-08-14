@@ -1,55 +1,89 @@
 //Declarar const produtos como array de objetos
 const produtos = [
-    {nome:"Conjunto de pincéis", preco:60, emEstoque:true},
-    {nome:"Batom", preco:40, emEstoque:true},
-    {nome:"Sombra glitter", preco:30, emEstoque:false},
-    {nome:"Base", preco:50, emEstoque:false}
+    {nome:"Conjunto de pincéis", preco:60, emEstoque:true, img: "img/produto01.jpg"},
+    {nome:"Batom", preco:40, emEstoque:true, img: "img/produto02.jpg"},
+    {nome:"Sombra glitter", preco:30, emEstoque:false, img: "img/produto03.jpg"},
+    {nome:"Base", preco:50, emEstoque:false, img: "img/produto04.jpg"}
 ];
 
-//Exibir toda a estrutura de produtos com console.table
-console.table(produtos);
-console.log("\n"); //Adiciona uma linha em branco no console
+const grid = document.getElementById("product-grid");
+const valorTotalSpan = document.getElementById("valor-total-estoque");
+const logLoops = document.getElementById("log-loops");
 
-//Calcular e exibir no console o valor total de itens em estoque, utilizando filter + reduce
-let disponivel = produtos.filter(item => item.emEstoque == true);
-let valorTotal = disponivel.reduce((subtotal, total) => subtotal.preco + total.preco);
-
-console.log(`Valor total do estoque disponível: R$${valorTotal},00`);
-
-//Criar um novo array de objetos com 10% de desconto em cada preço usando map e exibir com console.log
-let desconto = produtos.map((produto) => produto.preco = produto.preco - (produto.preco * 0.10));
-
-console.log(`Preços com 10% de desconto:\nR$${desconto[0]},00\nR$${desconto[1]},00\nR$${desconto[2]},00\nR$${desconto[3]},00\n`);
-console.log("\n");
-
-//Filtrar apenas produtos disponíveis com filter e exibir no console
-let n = 0;
-console.log("Os produtos disponíveis são:");
-console.log(disponivel);
-console.log("\n");
-
-//Iterar sobre produtos usando:
-
-//FOR...OF para imprimir o nome de cada produto
-console.log("Iteração com FOR...OF:")
-for (let produto of produtos)
-    console.log(produto.nome);
-console.log("\n");
-
-//WHILE para percorrer o array e exibir cada nome
-console.log("Iteração com WHILE:")
-let i = 0;
-while (i < produtos.length)
-{
-    console.log(produtos[i].nome)
-    i++;
+function formatarPreco(valor) {
+    return valor.toLocaleString("pt-BR", { style: "currecy", currency: "BRL "});
 }
-console.log("\n");
 
-//DO...WHILE para fazer uma contagem regressiva de quantos itens faltam processar.
-console.log("Iteração com DO...WHILE:");
-let numProdutos = produtos.length;
-do{
-    console.log(`Faltam ${numProdutos} produtos para processar...`);
-    numProdutos--;
-} while (numProdutos > 0);
+function renderizarProdutos(lista) {
+    grid.innerHTML = "";
+
+    lista.forEach(produto => {
+        const card = document.createElement("div");
+        card.classList.add("card");
+
+        const imagem = document.createElement("img");
+        imagem.src = "produto.nome";
+
+        const titulo = document.createElement("p");
+        preco.classList.add("price");
+        preco.textContent = formatarPreco(produto.preco);
+
+        const status = document.createElement("span");
+        status.textContent = produto.emEstoque ? "Disponível" : "Esgotado";
+        status.classList.add(produto.emEstoque ? "status" : "out-of-stock");
+
+        card.appendChild(imagem);
+        card.appendChild(titulo);
+        card.appendChild(preco);
+        card.appendChild(status);
+
+        grid.appendChild(card);
+    });
+}
+
+function calcularValorEstoque() {
+    const total = produtos
+        .filter(p => p.emEstoque)
+        .reduce((acc, p) => acc + p.preco, 0);
+    
+    valorTotalSpan.textContent = formatarPreco(total);
+}
+
+function demonstrarLoops() {
+    let resultado =  "";
+
+    resultado += "<strong>FOR...OF:</strong><br>";
+    for (let p of produtos) {
+        resultado += p.nome + "<br>";
+    }
+
+    resultado += "<br><strong>WHILE: </strong><br>";
+    let i = 0;
+    while (i < produtos.length) {
+        resultado += produtos[i].nome + "<br>";
+        i++;
+    }
+
+    resultado += "<br><strong>DO...WHILE</strong><br>"
+    let restante = produtos.length;
+    do {
+        resultado += `Faltam ${restante} produtos para processar...<br>`;
+        restante--;
+    } while (restante > 0);
+        logLoops.innerHTML = resultado;
+}
+
+document.getElementById("btn-filtrar").addEventListener("click", () => {
+    const disponiveis = produtos.filter(p => p.emEstoque);
+    renderizarProdutos(disponiveis);
+});
+
+document.getElementById("btn-mostrar-todos").addEventListener("click", () => {
+    renderizarProdutos(produtos);
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    renderizarProdutos(produtos);
+    calcularValorEstoque();
+    demonstrarLoops();
+});
